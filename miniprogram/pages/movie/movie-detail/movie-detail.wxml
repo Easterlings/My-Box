@@ -1,0 +1,72 @@
+<!--pages/movie/movie-detail/movie-detail.wxml-->
+<import src="../star/star-tpl.wxml"/>
+<import src="../no-score/noscore-tpl.wxml"/>
+<view class="container-detail">
+  <image class="head-img" src="{{movie.movieImg}}" mode="aspectFill"/>
+  <view class="head-img-cover">
+    <text class="main-title">{{movie.title}}</text>
+    <text class="sub-title">{{movie.country+'  '+movie.year}}   </text>
+  </view>
+  <view>
+    <image class="movie-img" src="{{movie.movieImg}}" data-src="{{movie.movieImg}}"/>
+    <view class="summary">
+      <view class="flex-row">
+        <text class="mark">{{movie.word1}}</text>
+        <view wx:if="{{movie.hasScore===true}}">
+          <template is="starTpl" data="{{stars:movie.stars,score:movie.score}}"/>
+        </view>
+        <view wx:else="{{movie.hasScore===false}}">
+          <view class="stars-container">
+            <text class="no-score">{{movie.word6}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="flex-row">
+        <text class="mark">{{movie.word2}}</text>
+        <text>{{movie.director.name}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">{{movie.word3}}</text>
+        <text>{{movie.casts}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">{{movie.word4}}</text>
+        <text>{{movie.generes}}</text>
+      </view>
+    </view>
+    <view class="content">
+      <view class="synopsis">
+        <text class="synopsis-font">{{movie.word5}}
+        </text>
+        <text class="summary-content">{{movie.summary}}</text>
+      </view>
+    </view>
+    <view class="cast">
+      <text class="cast-font">{{movie.word7}}</text>
+      <scroll-view class="cast-imgs" scroll-x="true" style="width:100%">
+        <block wx:for="{{movie.castsInfo}}" wx:for-item="item">
+          <view class="cast-container">
+            <image class="cast-img" src="{{item.img}}"></image>
+            <text class="cast-name">{{item.name}}</text>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+
+<view class="tool">
+  <view class = "tool-item" catchtap="onUPTap" data-post-id="{{post.postId}}">
+    <image src="/images/icon/wx_app_like.png"></image>
+    <text>{{post.upNum}}</text>
+  </view> 
+  <view class = "tool-item comment" catchtap="onCommentTap" data-post-id="{{post.postId}}">
+    <image src="/images/icon/wx_app_message.png"></image>
+    <text>{{post.commentNum}}</text>
+  </view> 
+  <view class = "tool-item" catchtap="onCollectionTap" data-post-id="{{post.postId}}">
+    <image wx:if="{{post.collectionStatus}}"src="/images/icon/wx_app_collected.png"/>
+    <image wx:else src="/images/icon/wx_app_collect.png"/>
+    <text>{{post.collectNum}}</text>
+  </view> 
+</view>

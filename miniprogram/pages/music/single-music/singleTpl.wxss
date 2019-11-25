@@ -1,0 +1,19 @@
+.music-container{
+  display:flex;
+  flex-direction: column;
+  padding: 0 22rpx;
+}
+.music-img{
+  width:200rpx;
+  height:270rpx;
+  padding-bottom:20rpx; 
+}
+.music-title{
+  margin-bottom: 6rpx;
+  font-size:28rpx;
+  
+}
+.author{
+  margin-bottom: 16rpx;
+  font-size:20rpx;
+}

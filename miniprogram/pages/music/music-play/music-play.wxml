@@ -1,0 +1,22 @@
+<!--pages/music/music-play/music-play.wxml-->
+<view class="player-container">
+  <view>
+    <image class="music-image" src="{{coverageUrl}}" mode="widthFix"></image>
+    <text class="musicName">{{originalTitle}}
+    </text>
+    <text class="author">{{author}}</text>
+  </view>
+  <view>
+    <slider bindchange="sliderChange" block-size="12rpx" step="2" value="{{offset}}" max="{{max}}" selected-color="#4c9dee"/>
+    <view>
+      <text class="time1">{{startTime}}</text>
+      <text class="time2">{{duration}}</text>
+    </view>
+  </view>
+  <button catchtap="playMusicTap">
+    <text>播放</text>
+  </button> 
+  <button catchtap="collectTap" data-song-id="{{songId}}">
+    <text>收藏</text>
+  </button>
+</view>

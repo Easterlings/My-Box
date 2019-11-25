@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/music/music",
+    "pages/music/music-more/music-more",
+    "pages/music/music-play/music-play",
+    "pages/movie/movie",
+    "pages/movie/movie-more/movie-more",
+    "pages/movie/movie-detail/movie-detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#659999",
+    "navigationBarTitleText": "假寐or现实"
+  },
+  "sitemapLocation": "sitemap76.json",
+  "debug": true,
+  "tabBar": {
+    "borderStyle": "white",
+    "selectedColor": "#4A6141",
+    "color": "#333",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/music/music",
+        "text": "音乐",
+        "iconPath": "images/icon/music.jpg",
+        "selectedIconPath": "images/icon/music.jpg"
+      },
+      {
+        "pagePath": "pages/movie/movie",
+        "text": "电影",
+        "iconPath": "images/icon/movie.jpg",
+        "selectedIconPath": "images/icon/movie.jpg"
+      }
+    ]
+  }
+}

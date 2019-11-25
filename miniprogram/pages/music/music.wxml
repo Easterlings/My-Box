@@ -1,0 +1,12 @@
+<import src="music-list/musicListTpl.wxml"/>
+<view class="container-music">
+  <view class="musics-template">
+    <template is="musicListTpl" data="{{...newMusics}}"/>
+  </view>
+  <view class="musics-template">
+    <template is="musicListTpl" data="{{...hotMusics}}"/>
+  </view>
+  <view class="musics-template">
+    <template is="musicListTpl" data="{{...europeMusics}}"/>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+<import src="../single-music/singleTpl.wxml"/>
+<template name="musicListTpl">
+<view class="music-list-container">
+      <view class="inner-container">
+        <view class="music-head">
+          <text class="slogan">{{categoryTitle}}</text>
+          <view catchtap="onMoreTap" class="more" data-category="{{categoryTitle}}">
+            <text class="more-text">{{moretext}}</text>
+            <image class="more-img" src="{{arrowUrl}}"></image>
+          </view>
+        </view>
+        <view class="musics-container">
+        <block wx:for="{{musics}}" wx:for-item="music">
+            <template is="singleTpl" data="{{...music}}"/>
+        </block>
+        </view>
+      </view>
+    </view>
+</template>

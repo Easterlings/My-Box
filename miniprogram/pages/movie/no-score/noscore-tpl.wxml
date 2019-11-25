@@ -1,0 +1,5 @@
+<template name="noscoreTpl">
+  <view class="stars-container">
+    <text class="no-score">暂无评分</text>
+  </view>
+</template>

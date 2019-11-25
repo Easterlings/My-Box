@@ -1,0 +1,144 @@
+/* pages/movie/movie-detail/movie-detail.wxss */
+@import "../star/star-tpl.wxss";
+@import "../no-score/noscore-tpl.wxss";
+.container-detail{
+  display:flex;
+  flex-direction: column;
+}
+.head-img{
+  width:100%;
+  height:320rpx;
+  -webkit-filter:blur(20rpx);
+}
+.head-img-cover{
+  width:100%;
+  height:320rpx;
+  position: absolute;
+  top:0;
+  left:0;
+  display:flex;
+  flex-direction: column
+}
+.main-title{
+  font-size:40rpx;
+  color:#FFF;
+  font-weight:bold;
+  margin-top:50rpx;
+  margin-left:40rpx;
+  letter-spacing: 2px;
+}
+.sub-title{
+  font-size:28rpx;
+  color:#FFF;
+  margin-left:40rpx;
+  margin-top:30rpx
+}
+.movie-img{
+  height:238rpx;
+  width:175rpx;
+  position: absolute;
+  top:160rpx;
+  right:30rpx;
+}
+.summary{
+  margin-left:40rpx;
+  margin-top:40rpx;
+  color:#777777;
+  font-size:29rpx
+}
+.flex-row{
+  display:flex;
+  flex-direction: row;
+  margin-bottom:10rpx;
+}
+.mark{
+  margin-right: 30rpx;
+  white-space:nowrap;
+  color:#999999;
+}
+.star-score{
+  color:#4A6141;
+  font-size:28rpx;
+} 
+.stars image{
+  padding-top:3rpx;
+  padding-left:3rpx;
+  height:27rpx;
+  width:27rpx;
+}
+.no-score{
+  color:#4A6141;
+  font-size:28rpx;
+}
+.content{
+  margin-left:40rpx;
+  display:flex;
+  flex-direction:column;
+  margin-top:50rpx;
+}
+.synopsis-font{
+  color:#999;
+  margin-bottom:40rpx;
+}
+.summary-content{
+  color:#999;
+  margin-top:20rpx;
+  margin-right:40rpx;
+  /* line-height:10rpx; */
+  letter-spacing:1px;
+  font-size:24rpx;
+}
+.cast{
+  margin-left:40rpx;
+  display:flex;
+  flex-direction:column;
+  margin-top:50rpx;
+}
+.cast-font{
+  color:#999;
+  margin-bottom:40rpx;
+}
+.cast-container{
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom:50rpx;
+  margin-right: 40rpx;
+  width:170rpx;
+  text-align: center;
+  white-space: normal;
+}
+.cast-imgs{
+  white-space: nowrap;
+}
+.cast-img{
+  width:170rpx;
+  height:210rpx;
+}
+.cast-name{
+  margin:10rpx auto 0;
+  font-size:24rpx
+}
+.tool{
+  height:64rpx;
+  text-align: center;
+  line-height:64rpx;
+  margin: 20rpx 28rpx 20rpx 0;
+}
+
+.tool-item{
+  display:inline-block;
+  vertical-align: top;
+  margin-right:30rpx;
+}
+
+.tool-item image{
+  height:50rpx;
+  width:50rpx;
+  vertical-align: -3px;
+  margin-right:10rpx;
+}
+
+.comment image{
+  transform:scale(.85);
+}
+

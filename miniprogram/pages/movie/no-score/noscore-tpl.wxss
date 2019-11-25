@@ -1,0 +1,15 @@
+.stars-container{
+  display:flex;
+  flex-direction:row;
+}
+.stars{
+  display:flex;
+  flex-direction:row;
+  height:17rpx;
+  margin-right: 24rpx;
+  margin-top:4rpx;
+}
+.no-score{
+  color:#4A6141;
+  font-size:20rpx;
+} 

@@ -1,0 +1,28 @@
+/* pages/music/music-play/music-play.wxss */
+/* .player-container{
+  display:flex;
+  flex-direction: column
+} */
+.music-image{
+  width: 100%;
+}
+.musicName{
+  margin-left:40rpx;
+  font-size:30rpx;
+  color: #000
+}
+.author{
+  margin-left:40rpx;
+  font-size:24rpx;
+  color:#777777;
+}
+.time1{
+  margin-top:0;
+  margin-left:40rpx;
+  font-size:24rpx;
+  color:#777777;
+}
+.time2{
+  font-size:24rpx;
+  color:#777777;
+}

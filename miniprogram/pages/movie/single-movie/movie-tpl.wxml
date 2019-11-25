@@ -1,0 +1,14 @@
+<import src="../star/star-tpl.wxml"/>
+<import src="../no-score/noscore-tpl.wxml"/>
+<template name="movieTpl">
+  <view class="movie-container" catchtap="onMovieTap" data-movie-id="{{movieId}}">
+    <image class="movie-img" src="{{coverageUrl}}"></image>
+    <text class="movie-title">{{title}}</text>
+    <view wx:if="{{hasScore===true}}">
+    <template is="starTpl" data="{{stars:stars,score:average}}"/>
+    </view>
+    <view wx:else="{{hasScore===false}}">
+    <template is="noscoreTpl" data="{{word:word}}"/>
+    </view>
+  </view>
+</template>

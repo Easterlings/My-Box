@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+    width: 180rpx;
+    height: 180rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+
+.userinfo-nickname {
+    font-size: 28rpx;
+    color: #FFFFFF;
+}
+.journey-container{
+    margin-top:200rpx;
+    border:1px solid #FFFFFF;
+    width:200rpx;
+    height:80rpx;
+    border-radius:5px;
+    text-align:center;
+}
+.journey{
+    font-size: 28rpx;
+    font-weight: bold;
+    line-height: 80rpx;
+    color:#FFFFFF;
+}
+page{
+    background-color:#659999
+}
