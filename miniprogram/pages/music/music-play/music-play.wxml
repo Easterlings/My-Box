@@ -1,22 +1,27 @@
 <!--pages/music/music-play/music-play.wxml-->
-<view class="player-container">
-  <view>
-    <image class="music-image" src="{{coverageUrl}}" mode="widthFix"></image>
-    <text class="musicName">{{originalTitle}}
-    </text>
-    <text class="author">{{author}}</text>
-  </view>
-  <view>
-    <slider bindchange="sliderChange" block-size="12rpx" step="2" value="{{offset}}" max="{{max}}" selected-color="#4c9dee"/>
-    <view>
-      <text class="time1">{{startTime}}</text>
-      <text class="time2">{{duration}}</text>
+<view class="music-container">
+  <image class="music-image" src="{{coverageUrl}}" mode="widthFix"></image>
+    <view class="collect-container">
+      <text class="musicName">{{originalTitle}}</text>
+      <image class="collect" catchtap="collectTap" wx:if="{{hascollect===false}}" src="/images/icon/wx_app_collect.png" data-song-id="{{songId}}" data-author="{{author}}" data-title="{{title}}" data-coverage-url="{{coverageUrl}}" ></image>
+      <image class="collect" catchtap="collectTap" wx:else="{{hascollect===true}}" src="/images/icon/wx_app_collected.png" data-song-id="{{songId}}" data-author="{{author}}" data-title="{{title}}" data-coverage-url="{{coverageUrl}}"></image>
     </view>
-  </view>
-  <button catchtap="playMusicTap">
-    <text>播放</text>
-  </button> 
-  <button catchtap="collectTap" data-song-id="{{songId}}">
-    <text>收藏</text>
-  </button>
+    <text class="author">{{author}}
+    
+    
+
+    </text>
 </view>
+<view class="slider-container">
+    <slider bindchange="sliderChange" block-size="12rpx" step="2" value="{{offset}}" max="{{max}}" selected-color="#4c9dee"/>
+    <view class="display-time">
+      <text class="time1">{{startTime}}</text>
+      <text class="time2">{{duration}}
+      </text>
+    </view>
+</view>
+<view class="playMusic">
+  <image class="play" catchtap="playMusicTap" wx:if="{{isOpen===false}}" src="/images/icon/wx_app_music_start.png"></image>
+  <image class="play" catchtap="pauseMusicTap" wx:else="{{isOpen===true}}" src="/images/icon/wx_app_music_stop.png"></image>
+</view>
+  

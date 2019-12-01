@@ -13,29 +13,48 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      //获取openid
+      wx.cloud.callFunction({
+        name: 'getOpenId',
+        complete: res => {
+          app.globalData.openid = res.result.openId
+        }
+      })
+      var that=this
       var url1 = "http://tingapi.ting.baidu.com/v1/restserver/ting?size=3&type=1&format=json&method=baidu.ting.billboard.billList"
-      this.getMusicListData(url1, "newMusics", "新歌榜")
-      var url2 = "http://tingapi.ting.baidu.com/v1/restserver/ting?size=3&type=2&format=json&method=baidu.ting.billboard.billList"
-      this.getMusicListData(url2, "hotMusics","热歌榜")
       var url3 = "http://tingapi.ting.baidu.com/v1/restserver/ting?size=3&type=21&format=json&method=baidu.ting.billboard.billList"
-      this.getMusicListData(url3, "europeMusics", "欧美金曲榜")
+      var url2 = "http://tingapi.ting.baidu.com/v1/restserver/ting?size=3&type=2&format=json&method=baidu.ting.billboard.billList"
+      wx.cloud.callFunction({
+        name: 'getHttp',
+        data:{
+          url: url1
+        },
+        complete: res => {
+          var musicData = JSON.parse(res.result)
+          that.processData(musicData.song_list, "newMusics", "新歌榜")
+        }
+      })
+      wx.cloud.callFunction({
+        name: 'getHttp',
+        data: {
+          url: url2
+        },
+        complete: res => {
+          var musicData2 = JSON.parse(res.result)
+          that.processData(musicData2.song_list, "hotMusics", "热歌榜")
+        }
+      })
+      wx.cloud.callFunction({
+        name: 'getHttp',
+        data: {
+          url: url3
+        },
+        complete: res => {
+          var musicData3 = JSON.parse(res.result)
+          that.processData(musicData3.song_list, "europeMusics", "欧美金曲榜")
+        }
+      })
       wx.showNavigationBarLoading()
-    },
-  getMusicListData: function (url, settedKey, categoryTitle){
-        var that=this
-        wx.request({
-            url: url,
-            method: 'GET',
-            header:{
-                "content-type":"json"
-            },
-            success:function(res){
-              that.processData(res.data.song_list, settedKey, categoryTitle)
-            },
-            fail:function(error){
-              console.log(error)
-            }
-        })
     },
     processData: function (musicData, settedKey, categoryTitle){
             var musics = []

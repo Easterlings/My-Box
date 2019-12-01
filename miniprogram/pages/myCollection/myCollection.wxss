@@ -1,0 +1,2 @@
+/* pages/myCollection/myCollection.wxss */
+@import "../music/music-grid/musicGridTpl.wxss"

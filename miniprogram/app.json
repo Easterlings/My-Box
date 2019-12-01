@@ -4,14 +4,12 @@
     "pages/music/music",
     "pages/music/music-more/music-more",
     "pages/music/music-play/music-play",
-    "pages/movie/movie",
-    "pages/movie/movie-more/movie-more",
-    "pages/movie/movie-detail/movie-detail"
+    "pages/myCollection/myCollection"
   ],
+  "requiredBackgroundModes":["audio"],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#659999",
-    "navigationBarTitleText": "假寐or现实"
+    "navigationBarBackgroundColor": "#659999"
   },
   "sitemapLocation": "sitemap76.json",
   "debug": true,
@@ -29,8 +27,8 @@
         "selectedIconPath": "images/icon/music.jpg"
       },
       {
-        "pagePath": "pages/movie/movie",
-        "text": "电影",
+        "pagePath": "pages/myCollection/myCollection",
+        "text": "我的收藏",
         "iconPath": "images/icon/movie.jpg",
         "selectedIconPath": "images/icon/movie.jpg"
       }

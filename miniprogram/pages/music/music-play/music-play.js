@@ -2,6 +2,7 @@
 const musicPlayer = wx.getBackgroundAudioManager();
 const db=wx.cloud.database()
 const collection=db.collection('users');
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -12,10 +13,10 @@ Page({
     originalTitle:"",
     coverageUrl: "",
     musicUrl: "",
-    isOpen:false,
+    isOpen:true,
     songId:"",
     hascollect:false,
-    openid:""
+    removeId:""
   },
 
   /**
@@ -24,42 +25,40 @@ Page({
   onLoad: function (options) {
     var musicId = options.id
     var coverageUrl = options.coverageUrl
-    var url ="http://music.baidu.com/data/music/fmlink?rate=320"
-    url = url + "&songIds=" + musicId +"&format=json"
     this.setData({
       songId:musicId
     })
-    //获取openid
-    wx.cloud.callFunction({
-      name:'getOpenId',
-      complete:res=>{
-        console.log("yes")
-        console.log(res)
+    //在数据库中查找收藏记录
+    var that=this
+    collection.where({
+      _openid:app.globalData.openid,
+      songId:musicId
+      }).get({
+      success(res){
+        if(res.data!=null){
+          that.setData({
+            hascollect:true,
+            removeId:res.data[0]._id
+          })
+        }
       }
     })
-    // collection.where({
-    //   _openid:this.data.openid
-    //   }).get({
-    //   success(res){
-    //     console.log()
-    //   }
-    // })
-    this.getMusicData(url, coverageUrl)
-  },
-  getMusicData: function (url, coverageUrl) {
-    var that = this
-    wx.request({
-      url: url,
-      method: 'GET',
-      header: {
-        "content-type": "json"
+    console.log(musicId)
+    var url = "http://music.baidu.com/data/music/fmlink?rate=320"
+    url = url + "&songIds=" + musicId+"&format=json"
+    //云函数访问http网站
+    wx.cloud.callFunction({
+      name: 'getHttp',
+      data: {
+        url: url
       },
-      success: function (res) {
-        var temp=res.data
-        that.processData(temp.data.songList[0], coverageUrl)
+      success: res => {
+        var musicData = JSON.parse(res.result)
+        console.log(musicData)
+        that.processData(musicData.data.songList[0], coverageUrl)
+        that.playMusic()
       },
-      fail: function (error) {
-        console.log(error)
+      fail:function(error){
       }
     })
   },
@@ -82,9 +81,25 @@ Page({
       musicUrl: musicUrl
     })
   },
-  playMusicTap:function(event){
-    musicPlayer.title = this.data.title
-    musicPlayer.src = this.data.musicUrl
+  playMusicTap: function (event){
+    musicPlayer.play()
+    console.log("继续播放")
+    this.setData({
+      isOpen: true
+    })
+    app.globalData.isplay=true
+  },
+  playMusic:function(event){
+    if (app.globalData.isplay==true&&app.globalData.songId == this.data.songId){
+    }
+    else
+    {
+      musicPlayer.title = this.data.title
+      musicPlayer.src = this.data.musicUrl
+      console.log(this.data.musicUrl)
+      musicPlayer.coverImgUrl = this.data.coverageUrl
+      app.globalData.isplay = true
+    }
     musicPlayer.onTimeUpdate(()=>{
       var currentTime=parseInt(musicPlayer.currentTime)
       var min="0"+parseInt(currentTime/60);
@@ -105,28 +120,83 @@ Page({
       this.setData({
         startTime:startTime,
         offset: currentTime,
-        changePlay:true,
         duration:temp,
         max:max
       })
     })
+    musicPlayer.onEnded(()=>{
+      this.setData({
+        startTime:"00:00",
+        isOpen:false,
+        offset:0
+      })
+      app.global.isplay = false
+    })
     musicPlayer.play()
+    this.setData({
+      isOpen:true
+    })
+    app.globalData.isplay = true
+  },
+  pauseMusicTap:function(event){
+    console.log("暂停成功")
+    wx.pauseBackgroundAudio()
+    this.setData({
+      isOpen: false
+    })
+    app.globalData.isplay = false
   },
   sliderChange(event){
     var that=this
     var offset=parseInt(event.detail.value)
-    musicPlayer.play()
     musicPlayer.seek(offset)
+    musicPlayer.play()
   },
   collectTap(event){
-    console.log(event.currentTarget.dataset.songId)
-    collection.add({
-      data:{
-        songId: event.currentTarget.dataset.songId
-      },
-      success(result){
-        console.log("添加成功")
-      }
+    console.log(this.data.hascollect)
+    var that = this
+    if (!this.data.hascollect){
+      collection.add({
+        data: {
+          songId: event.currentTarget.dataset.songId,
+          author: event.currentTarget.dataset.author,
+          title: event.currentTarget.dataset.title,
+          coverageUrl: event.currentTarget.dataset.coverageUrl,
+        },
+        success(result) {
+          console.log("添加成功")
+          that.setData({
+            hascollect:true,
+          })
+        }
+      })
+    }
+    else{
+      collection.where({
+        _openid: app.globalData.openid,
+        songId: that.data.songId
+      }).get({
+        success(res) {
+          if (res.data != null) {
+            var removeName = res.data[0]._id
+            console.log(removeName)
+            collection.doc(removeName).remove({
+              success(res) {
+                console.log("删除成功")
+                that.setData({
+                  hascollect: false
+                })
+              }
+            })
+          }
+        }
+      })
+    }
+    wx.showToast({
+      title: this.data.hascollect?"取消成功":"收藏成功",
+      duration:1000,
+      icon:"success",
+      mask:true
     })
   },
   /**
@@ -154,7 +224,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    app.globalData.songId = this.data.songId
   },
 
   /**

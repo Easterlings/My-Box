@@ -3,7 +3,14 @@ wx.cloud.init({
   env:'liuz',
   traceUser:true
 })
+
+//获取openid
 App({
+  globalData:{
+    openid:"",
+    isplay:false,
+    songId:"",
+  },
   onLaunch: function () {
     // 展示本地存储能力
     /*var logs = wx.getStorageSync('logs') || []

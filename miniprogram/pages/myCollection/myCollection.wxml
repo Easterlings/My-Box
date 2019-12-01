@@ -1,0 +1,3 @@
+<!--pages/myCollection/myCollection.wxml-->
+<import src="../music/music-grid/musicGridTpl.wxml"/>
+<template is="musicGridTpl" data="{{musics}}"/>

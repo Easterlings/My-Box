@@ -86,8 +86,9 @@ Page({
   },
   onMusicTap: function (event) {
     var musicId = event.currentTarget.dataset.musicId
+    var coverageUrl = event.currentTarget.dataset.coverageUrl
     wx.navigateTo({
-      url: "../music-play/music-play?id=" + musicId,
+      url: "../music-play/music-play?id=" + musicId + "&coverageUrl=" + coverageUrl,
     })
   },
   /**
